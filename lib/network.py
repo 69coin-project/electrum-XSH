@@ -18,9 +18,7 @@ from collections import deque
 DEFAULT_PORTS = {'t':'50001', 's':'50002', 'h':'8081', 'g':'8082'}
 
 DEFAULT_SERVERS = {
-    'electrum-SHIELD.xyz':{'t':'50001', 's':'50002'},
-    'electrum-XSH.stream':{'t':'50001', 's':'50002'},
-    'electrum-XSH.party':{'t':'50001', 's':'50002'},
+    '188.226.178.216':{'t':'50001', 's':'50002'},
 
 }
 
