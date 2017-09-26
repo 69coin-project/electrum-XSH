@@ -17,12 +17,12 @@ import PyQt4.QtGui as QtGui
 import aes
 import base64
 
-import electrum_xvg as electrum
-from electrum_xvg.plugins import BasePlugin, hook
-from electrum_xvg.i18n import _
+import electrum_XSH as electrum
+from electrum_XSH.plugins import BasePlugin, hook
+from electrum_XSH.i18n import _
 
-from electrum_xvg_gui.qt import HelpButton, EnterButton
-from electrum_xvg_gui.qt.util import ThreadedButton, Buttons, CancelButton, OkButton
+from electrum_XSH_gui.qt import HelpButton, EnterButton
+from electrum_XSH_gui.qt.util import ThreadedButton, Buttons, CancelButton, OkButton
 
 class Plugin(BasePlugin):
 

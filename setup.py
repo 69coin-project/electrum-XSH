@@ -20,13 +20,13 @@ data_files = []
 if platform.system() in [ 'Linux', 'FreeBSD', 'DragonFly']:
     usr_share = os.path.join(sys.prefix, "share")
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['electrum-xvg.desktop']),
-        (os.path.join(usr_share, 'pixmaps/'), ['icons/electrum-xvg.png'])
+        (os.path.join(usr_share, 'applications/'), ['electrum-XSH.desktop']),
+        (os.path.join(usr_share, 'pixmaps/'), ['icons/electrum-XSH.png'])
     ]
 
 
 setup(
-    name="Electrum-XVG",
+    name="Electrum-XSH",
     version=version.ELECTRUM_VERSION,
     install_requires=[
         'slowaes>=0.1a1',
@@ -40,18 +40,18 @@ setup(
         'dnspython',
     ],
     package_dir={
-        'electrum_xvg': 'lib',
-        'electrum_xvg_gui': 'gui',
-        'electrum_xvg_plugins': 'plugins',
+        'electrum_XSH': 'lib',
+        'electrum_XSH_gui': 'gui',
+        'electrum_XSH_plugins': 'plugins',
     },
-    packages=['electrum_xvg','electrum_xvg_gui','electrum_xvg_gui.qt','electrum_xvg_plugins'],
+    packages=['electrum_XSH','electrum_XSH_gui','electrum_XSH_gui.qt','electrum_XSH_plugins'],
     package_data={
-        'electrum_xvg': [
+        'electrum_XSH': [
             'www/index.html',
             'wordlist/*.txt',
             'locale/*/LC_MESSAGES/electrum.mo',
         ],
-        'electrum_xvg_gui': [
+        'electrum_XSH_gui': [
             "qt/themes/cleanlook/name.cfg",
             "qt/themes/cleanlook/style.css",
             "qt/themes/sahara/name.cfg",
@@ -60,12 +60,12 @@ setup(
             "qt/themes/dark/style.css",
         ]
     },
-    scripts=['electrum-xvg'],
+    scripts=['electrum-XSH'],
     data_files=data_files,
-    description="Lightweight Verge Wallet",
+    description="Lightweight SHIELD Wallet",
     author="sunerok",
-    author_email="twitter.com/vergecurrency",
+    author_email="twitter.com/ShieldCoin",
     license="GNU GPLv3",
-    url="https://vergecurrency.com",
-    long_description="""Lightweight Verge Wallet"""
+    url="https://ShieldCoin.com",
+    long_description="""Lightweight SHIELD Wallet"""
 )

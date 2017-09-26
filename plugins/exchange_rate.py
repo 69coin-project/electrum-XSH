@@ -11,10 +11,10 @@ import re
 from ssl import SSLError
 from decimal import Decimal
 
-from electrum_xvg.plugins import BasePlugin, hook
-from electrum_xvg.i18n import _
-from electrum_xvg_gui.qt.util import *
-from electrum_xvg_gui.qt.amountedit import AmountEdit
+from electrum_XSH.plugins import BasePlugin, hook
+from electrum_XSH.i18n import _
+from electrum_XSH_gui.qt.util import *
+from electrum_XSH_gui.qt.amountedit import AmountEdit
 
 
 EXCHANGES = ["Bit2C",
@@ -98,50 +98,50 @@ class Exchanger(threading.Thread):
 
 
     def update_b2c(self):
-        jsonresp = self.get_json('www.bit2c.co.il', "/Exchanges/XVGNIS/Ticker.json")
+        jsonresp = self.get_json('www.bit2c.co.il', "/Exchanges/XSHNIS/Ticker.json")
         return {"NIS": Decimal(str(jsonresp["ll"]))}
 
     def update_bv(self):
         jsonresp = self.get_json('api.bitcoinvenezuela.com', "/")
-        return dict([(r, Decimal(jsonresp["XVG"][r])) for r in jsonresp["XVG"]])
+        return dict([(r, Decimal(jsonresp["XSH"][r])) for r in jsonresp["XSH"]])
 
     def update_bf(self):
-        jsonresp = self.get_json('api.bitfinex.com', "/v1/pubticker/xvgusd")
+        jsonresp = self.get_json('api.bitfinex.com', "/v1/pubticker/XSHusd")
         return {"USD": Decimal(jsonresp["last_price"])}
 
     def update_be(self):
         quote_currencies = {"CNH": 0.0, "EUR": 0.0, "GBP": 0.0, "RUR": 0.0, "USD": 0.0}
-        jsonresp = self.get_json('btc-e.com', "/api/3/ticker/" + ('-'.join(['xvg_'+c.lower() for c in quote_currencies])))
+        jsonresp = self.get_json('btc-e.com', "/api/3/ticker/" + ('-'.join(['XSH_'+c.lower() for c in quote_currencies])))
         for cur in quote_currencies:
-            quote_currencies[cur] = Decimal(str(jsonresp['xvg_'+cur.lower()]["last"]))
+            quote_currencies[cur] = Decimal(str(jsonresp['XSH_'+cur.lower()]["last"]))
         return quote_currencies
 
     def update_cv(self):
-        jsonresp = self.get_json('www.cavirtex.com', "/api2/ticker.json?currencypair=XVGCAD")
-        cadprice = jsonresp["ticker"]["XVGCAD"]["last"]
+        jsonresp = self.get_json('www.cavirtex.com', "/api2/ticker.json?currencypair=XSHCAD")
+        cadprice = jsonresp["ticker"]["XSHCAD"]["last"]
         return {"CAD": Decimal(str(cadprice))}
 
     def update_CNY(self):
-        jsonresp = self.get_json('data.btcchina.com', "/data/ticker?market=xvgcny")
+        jsonresp = self.get_json('data.btcchina.com', "/data/ticker?market=XSHcny")
         cnyprice = jsonresp["ticker"]["last"]
         return {"CNY": Decimal(str(cnyprice))}
 
     def update_gc(self):
         jsonresp = self.get_json('x.g0cn.com', "/prices")
         quote_currencies = {}
-        for r in jsonresp["prices"]["XVG"]:
-            quote_currencies[r] = Decimal(jsonresp["prices"]["XVG"][r])
+        for r in jsonresp["prices"]["XSH"]:
+            quote_currencies[r] = Decimal(jsonresp["prices"]["XSH"][r])
         return quote_currencies
 
     def update_hb(self):
         quote_currencies = {"EUR": 0.0, "USD": 0.0}
         for cur in quote_currencies:
-            quote_currencies[cur] = Decimal(str(self.get_json('api.hitbtc.com', "/api/1/public/XVG" + cur + "/ticker")["last"]))
+            quote_currencies[cur] = Decimal(str(self.get_json('api.hitbtc.com', "/api/1/public/XSH" + cur + "/ticker")["last"]))
         return quote_currencies
 
     def update_kk(self):
         resp_currencies = self.get_json('api.kraken.com', "/0/public/AssetPairs")["result"]
-        pairs = ','.join([k for k in resp_currencies if k.startswith("XXVGZ")])
+        pairs = ','.join([k for k in resp_currencies if k.startswith("XXSHZ")])
         resp_rate = self.get_json('api.kraken.com', "/0/public/Ticker?pair=" + pairs)["result"]
         quote_currencies = {}
         for cur in resp_rate:
@@ -149,7 +149,7 @@ class Exchanger(threading.Thread):
         return quote_currencies
 
     def update_ok(self):
-        jsonresp = self.get_json('www.okcoin.cn', "/api/ticker.do?symbol=xvg_cny")
+        jsonresp = self.get_json('www.okcoin.cn', "/api/ticker.do?symbol=XSH_cny")
         cnyprice = jsonresp["ticker"]["last"]
         return {"CNY": Decimal(str(cnyprice))}
 
@@ -213,7 +213,7 @@ class Plugin(BasePlugin):
         self.get_fiat_price_text(r)
         quote = r.get(0)
         if quote:
-            price_text = "1 XVG~%s"%quote
+            price_text = "1 XSH~%s"%quote
             fiat_currency = quote[-3:]
             btc_price = self.btc_rate
             fiat_balance = Decimal(btc_price) * (Decimal(btc_balance)/100000000)
@@ -277,7 +277,7 @@ class Plugin(BasePlugin):
             cur_currency = self.fiat_unit()
             if cur_currency in ("ARS", "EUR", "USD", "VEF"):
                 try:
-                    self.resp_hist = self.exchanger.get_json('api.bitcoinvenezuela.com', "/historical/index.php?coin=XVG")[cur_currency + '_XVG']
+                    self.resp_hist = self.exchanger.get_json('api.bitcoinvenezuela.com', "/historical/index.php?coin=XSH")[cur_currency + '_XSH']
                 except Exception:
                     return
             else:
@@ -286,7 +286,7 @@ class Plugin(BasePlugin):
             cur_currency = self.fiat_unit()
             if cur_currency in ("EUR", "USD"):
                 try:
-                    self.resp_hist = self.exchanger.get_json('api.kraken.com', "https://api.kraken.com/0/public/OHLC?pair=XVG"+cur_currency+"&interval=1440")['result']['XXVGZ'+cur_currency]
+                    self.resp_hist = self.exchanger.get_json('api.kraken.com', "https://api.kraken.com/0/public/OHLC?pair=XSH"+cur_currency+"&interval=1440")['result']['XXSHZ'+cur_currency]
                     self.resp_hist = dict([(t[0], t[4]) for t in self.resp_hist])
                 except Exception:
                     return

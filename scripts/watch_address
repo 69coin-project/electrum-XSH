@@ -2,12 +2,12 @@
 
 import sys
 import time
-import electrum_xvg as electrum
+import electrum_XSH as electrum
 
 try:
     addr = sys.argv[1]
 except Exception:
-    print "usage: watch_address <verge_address>"
+    print "usage: watch_address <SHIELD_address>"
     sys.exit(1)
 
 # start network

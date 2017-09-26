@@ -1,12 +1,12 @@
-# Configuration file for the verge electrum client
+# Configuration file for the SHIELD electrum client
 # Settings defined here are shared across wallets
 #
-# copy this file to /etc/electrum-xvg.conf if you want read-only settings
-# copy it into your ~/.electrum-xvg/ directory if you want global settings
+# copy this file to /etc/electrum-XSH.conf if you want read-only settings
+# copy it into your ~/.electrum-XSH/ directory if you want global settings
 # that can be rewritten by the client
 
 [client]
-server = electrum-verge.xyz:50002:t
+server = electrum-SHIELD.xyz:50002:t
 proxy = None
 gap_limit = 5
 # booleans use python syntax
