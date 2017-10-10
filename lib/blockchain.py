@@ -34,7 +34,7 @@ class Blockchain():
     def __init__(self, config, network):
         self.config = config
         self.network = network
-        self.headers_url = 'http://electrum-SHIELD.xyz/blockchain_headers'
+        self.headers_url = 'http://188.226.178.216/blockchain_headers' #TODO: make file accessable
         self.local_height = 0
         self.set_local_height()
 

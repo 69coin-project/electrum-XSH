@@ -31,9 +31,9 @@ import aes
 ################################## transactions
 
 DUST_THRESHOLD = 0
-MIN_RELAY_TX_FEE = 1000000
+MIN_RELAY_TX_FEE = 500000
 RECOMMENDED_FEE = 1000000
-COINBASE_MATURITY = 120
+COINBASE_MATURITY = 240
 COIN = 100000000
 
 # AES encryption

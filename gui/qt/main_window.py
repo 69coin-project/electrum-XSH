@@ -1197,7 +1197,7 @@ class ElectrumWindow(QMainWindow):
         try:
             tx = self.wallet.make_unsigned_transaction(coins, outputs, fee)
             if not tx:
-                raise BaseException(_("Insufficient funds"))
+                raise Exception(_("Insufficient funds"))
         except Exception as e:
             traceback.print_exc(file=sys.stdout)
             self.show_message(str(e))
@@ -1945,7 +1945,7 @@ class ElectrumWindow(QMainWindow):
 
         try:
             mnemonic = self.wallet.get_mnemonic(password)
-        except BaseException as e:
+        except Exception as e:
             QMessageBox.warning(self, _('Error'), str(e), _('OK'))
             return
         from seed_dialog import SeedDialog
@@ -2074,7 +2074,7 @@ class ElectrumWindow(QMainWindow):
         try:
             decrypted = self.wallet.decrypt_message(str(pubkey_e.text()), str(encrypted_e.toPlainText()), password)
             message_e.setText(decrypted)
-        except BaseException as e:
+        except Exception as e:
             traceback.print_exc(file=sys.stdout)
             self.show_warning(str(e))
 
@@ -2085,7 +2085,7 @@ class ElectrumWindow(QMainWindow):
         try:
             encrypted = bitcoin.encrypt_message(message, str(pubkey_e.text()))
             encrypted_e.setText(encrypted)
-        except BaseException as e:
+        except Exception as e:
             traceback.print_exc(file=sys.stdout)
             self.show_warning(str(e))
 
@@ -2199,7 +2199,7 @@ class ElectrumWindow(QMainWindow):
         from electrum_XSH import qrscanner
         try:
             data = qrscanner.scan_qr(self.config)
-        except BaseException, e:
+        except Exception, e:
             QMessageBox.warning(self, _('Error'), _(e), _('OK'))
             return
         if not data:

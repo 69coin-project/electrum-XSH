@@ -204,12 +204,16 @@ def time_difference(distance_in_time, include_seconds):
         return "over %d years" % (round(distance_in_minutes / 525600))
 
 block_explorer_info = {
-    'SHIELD-Blockchain.info': ('http://SHIELD-blockchain.info/',
-                        {'tx': 'tx', 'addr': 'address'}),
+    'umine.org': ('https://umine.org/explorer/XSH',
+                        {'tx': '?txid=', 'addr': 'address'}),
+    'bigmine.org': ('https://bigmine.org/explorer/XSH',
+                        {'tx': '?txid=', 'addr': 'address'}),
+    'beardedpool.fr': ('https://beardedpool.fr/explorer/XSH',
+                        {'tx': '?txid=', 'addr': 'address'}),
 }
 
 def block_explorer(config):
-    return config.get('block_explorer', 'SHIELD-Blockchain.info')
+    return config.get('block_explorer', 'umine.org')
 
 def block_explorer_tuple(config):
     return block_explorer_info.get(block_explorer(config))
@@ -222,7 +226,7 @@ def block_explorer_URL(config, kind, item):
     if not kind_str:
         return
     url_parts = [be_tuple[0], kind_str, item]
-    return "/".join(url_parts)
+    return "".join(url_parts)
 
 # URL decode
 #_ud = re.compile('%([0-9a-hA-H]{2})', re.MULTILINE)
